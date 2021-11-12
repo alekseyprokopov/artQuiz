@@ -1,0 +1,15 @@
+//переменные
+@import './styles/vars.scss';
+@import './styles/reset.scss';
+
+body {
+  color: $font-color;
+  font: $base-font;
+  overflow: hidden;
+}
+
+.container{
+  // margin: 0 auto;
+  padding: $gap-vert $gap-gor;
+  // max-width: fit-content;
+}

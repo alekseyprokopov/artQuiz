@@ -1,18 +1,15 @@
-import image from './images/lazy.png';
+import './style.scss'
+import mainScreenHTML from "./pages/1.mainScreen/index.js";
+import settingsHTML from "./pages/2.settings/index.js";
 
-const createImage = (src) => new Promise((res, rej) => {
-  const img = new Image();
-  img.onload = () => res(img);
-  img.onerror = rej;
-  img.src = src;
-});
+import htmlToElement from './modules/htmlToElement'
 
-async function render() {
-  const subHeader = document.createElement('h2');
-  subHeader.innerHTML = 'This elements was created by js';
-  const myImage = await createImage(image);
-  document.body.appendChild(subHeader);
-  document.body.appendChild(myImage);
-}
 
-render();
+const root = document.querySelector(".root");
+
+root.append(settingsHTML);
+
+
+//раскоментируй меня:
+
+// root.append(mainScreenHTML);

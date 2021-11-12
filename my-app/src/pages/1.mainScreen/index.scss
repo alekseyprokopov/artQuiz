@@ -1,0 +1,25 @@
+@import '../../styles/vars.scss';
+
+.mainScreen {
+  height: 100vh;
+  background-image: url('../../assets/background.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.button-container {
+  display: block;
+  // width: 100%;
+  // margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $buttons-gap;
+}
+
+.logo {
+  padding-top: $logo-padding-top;
+  padding-bottom: $logo-padding-bottom;
+}

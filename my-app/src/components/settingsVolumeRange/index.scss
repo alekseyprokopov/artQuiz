@@ -1,0 +1,10 @@
+@import '../../styles/vars.scss';
+
+.button-settings {
+  width: 30px;
+  height: 30px;
+  background: url('../../assets/svg/settings.svg');
+  background-size: 30px 30px;
+  margin-right: 0;
+  margin-left: auto;
+}
