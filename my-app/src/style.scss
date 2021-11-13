@@ -8,8 +8,12 @@ body {
   overflow: hidden;
 }
 
-.container{
+.container {
   // margin: 0 auto;
   padding: $gap-vert $gap-gor;
   // max-width: fit-content;
+}
+
+.hide-page{
+  display: none;
 }

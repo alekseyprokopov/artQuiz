@@ -1,10 +1,23 @@
 @import '../../styles/vars.scss';
 
-.button-settings {
-  width: 30px;
-  height: 30px;
-  background: url('../../assets/svg/settings.svg');
-  background-size: 30px 30px;
-  margin-right: 0;
-  margin-left: auto;
+.settings-volume-icons {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.settings-volume-params {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  max-width: 500px;
+  input {
+    width: 100%;
+    padding: auto $gap-gor;
+    margin: 0 auto;
+    height: 2px;
+  }
+}
+
+.settings-volume-title {
+  font: $base-font-bold;
 }

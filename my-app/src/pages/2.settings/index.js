@@ -1,14 +1,22 @@
 import settings from './index.html';
 import './index.scss';
-import htmlToElement from '../../modules/htmlToElement';
-//components:
 
+//functions
+import htmlToElement from '../../modules/htmlToElement';
+import toggleSettingsHide from '../../modules/toggleSettingsHide';
+
+//components:
+import settingsHeaderHTML from '../../components/settingsHeader';
 import volumeRange from '../../components/settingsVolumeRange';
+import timeGame from '../../components/settingsTimeGame';
+import timeToAnswer from '../../components/settingsTimeToAnswer';
 import button from '../../components/customButton/button';
-import footer from '../../components/footer';
-console.log(volumeRange);
 
 const settingsHTML = htmlToElement(settings);
+
+const settingsHeader = settingsHeaderHTML({
+  onClick: toggleSettingsHide
+});
 
 const defaultButton = button({
   onClick: () => {
@@ -29,14 +37,13 @@ const saveButton = button({
 const buttonContainer = document.createElement('div');
 buttonContainer.classList.add('setting-button-container');
 
-buttonContainer.appendChild(volumeRange);
 buttonContainer.appendChild(defaultButton);
 buttonContainer.appendChild(saveButton);
 
-
-
-
+settingsHTML.firstElementChild.appendChild(settingsHeader);
+settingsHTML.firstElementChild.appendChild(volumeRange);
+settingsHTML.firstElementChild.appendChild(timeGame);
+settingsHTML.firstElementChild.appendChild(timeToAnswer);
 settingsHTML.firstElementChild.appendChild(buttonContainer);
-settingsHTML.firstElementChild.appendChild(footer);
 
 export default settingsHTML;

@@ -1,0 +1,10 @@
+@import '../../styles/vars.scss';
+
+.settings-header {
+  cursor: pointer;
+}
+.settings-header::before{
+  content: '<';
+  position: absolute;
+  left: 5px;
+}

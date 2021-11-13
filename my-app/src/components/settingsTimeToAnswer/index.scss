@@ -1,0 +1,26 @@
+@import '../../styles/vars.scss';
+
+.settings-TimeToAnswer-params {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font: $base-font;
+  }
+  button:active {
+    background-color: $button-active-color;
+  }
+  input {
+    text-align: center;
+    width: 50px;
+    background: none;
+    color: $font-color;
+    font: $base-font;
+  }
+}
+
+.settings-TimeToAnswer-title {
+  font: $base-font-bold;
+}
