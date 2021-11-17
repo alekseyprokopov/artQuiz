@@ -1,7 +1,8 @@
 @import '../../styles/vars.scss';
 
-.mainScreen {
+.home {
   height: 100vh;
+  width: 100%;
   background-image: url('../../assets/background.svg');
   background-repeat: no-repeat;
   background-position: center center;
@@ -19,7 +20,7 @@
   gap: $buttons-gap;
 }
 
-.logo {
+.main-logo {
   padding-top: $logo-padding-top;
   padding-bottom: $logo-padding-bottom;
 }

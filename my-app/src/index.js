@@ -1,16 +1,61 @@
-import './style.scss'
-import mainScreenHTML from "./pages/1.mainScreen/index.js";
-import settingsHTML from "./pages/2.settings/index.js";
+import './style.scss';
 
-import htmlToElement from './modules/htmlToElement'
-import footerHtml from './components/footer';
-
-const root = document.querySelector(".root");
-
-root.append(settingsHTML);
+import Home       from    './pages/1.home';
+import Settings   from    './pages/2.settings';
+import Categories from    './pages/3.categories';
+import question   from    './pages/4.question';
 
 
-//раскоментируй меня:
+import Error404 from './views/pages/Error404.js';
+import PostShow from './views/pages/PostShow.js';
+import Register from './views/pages/Register.js';
 
-root.append(mainScreenHTML);
-root.append(footerHtml);
+import Bottombar from './components/footer';
+
+import Utils from './services/Utils.js';
+
+const routes = {
+  '/': Home,
+  '/settings': Settings,
+  '/categories': Categories,
+  '/question': question,
+
+  '/p/:id': PostShow,
+  '/register': Register,
+};
+
+const router = async () => {
+  // Lazy load view element:
+  const header = null || document.getElementById('header_container');
+  const content = null || document.getElementById('page_container');
+  const footer = null || document.getElementById('footer_container');
+
+  // Render the Header and footer of the page
+  // header.innerHTML = await Navbar.render();
+  // await Navbar.after_render();
+  footer.appendChild(await Bottombar.render());
+  await Bottombar.after_render();
+
+  // Get the parsed URl from the addressbar
+  let request = Utils.parseRequestURL();
+
+  // Parse the URL and if it has an id part, change it with the string ":id"
+  let parsedURL =
+    (request.resource ? '/' + request.resource : '/') +
+    (request.id ? '/:id' : '') +
+    (request.verb ? '/' + request.verb : '');
+
+  // Get the page from our hash of supported routes.
+  // If the parsed URL is not in our list of supported routes, select the 404 page instead
+  let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+  content.appendChild(await page.render());
+  await page.after_render();
+};
+
+// Listen on hash change:
+window.addEventListener('hashchange', router);
+
+// Listen on page load:
+window.addEventListener('load', router);
+
+console.log('hello');

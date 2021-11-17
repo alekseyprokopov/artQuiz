@@ -1,0 +1,17 @@
+@import '../../styles/vars.scss';
+
+.category-card {
+  max-width: 200px;
+  max-height: 250px;
+  .category-card-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+  }
+
+  .category-card-preview {
+    img {
+      border-radius: 20%;
+    }
+  }
+}

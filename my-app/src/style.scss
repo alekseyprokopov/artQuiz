@@ -5,7 +5,12 @@
 body {
   color: $font-color;
   font: $base-font;
-  overflow: hidden;
+  overflow: auto;
+  background-color: black;
+  height: 100vh;
+}
+.page_container{
+
 }
 
 .container {
@@ -14,6 +19,6 @@ body {
   // max-width: fit-content;
 }
 
-.hide-page{
+.hide-page {
   display: none;
 }
