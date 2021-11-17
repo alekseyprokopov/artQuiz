@@ -3,8 +3,7 @@ import './style.scss';
 import Home       from    './pages/1.home';
 import Settings   from    './pages/2.settings';
 import Categories from    './pages/3.categories';
-import question   from    './pages/4.question';
-
+import Question   from    './pages/4.question';
 
 import Error404 from './views/pages/Error404.js';
 import PostShow from './views/pages/PostShow.js';
@@ -18,7 +17,7 @@ const routes = {
   '/': Home,
   '/settings': Settings,
   '/categories': Categories,
-  '/question': question,
+  '/question': Question,
 
   '/p/:id': PostShow,
   '/register': Register,
@@ -48,6 +47,7 @@ const router = async () => {
   // Get the page from our hash of supported routes.
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+  console.log(page.render());
   content.appendChild(await page.render());
   await page.after_render();
 };

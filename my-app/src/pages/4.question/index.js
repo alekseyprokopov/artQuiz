@@ -6,39 +6,40 @@ import htmlToElement from '../../modules/htmlToElement';
 
 //components:
 import button from '../../components/customButton/button';
-import categoryCardFunc from '../../components/category-card';
-const categoriesHTML = htmlToElement(categories);
+const questionHTML = htmlToElement(question);
 
-// const categoryCard = categoryCardFunc({
-//   onClick: () => console.log('hello'),
-//   title: 'Portrait',
-//   score: '5/10',
-// });
 
-categoriesHTML.firstElementChild.appendChild(categoriesHeader);
-// categoriesHTML.firstElementChild.appendChild(categoryCard);
-let categoriesCardContainer = document.createElement('div');
-categoriesCardContainer.classList.add('categories-card-container')
+let questionsAnswersContainer = document.createElement('div');
+questionsAnswersContainer.classList.add('questions-answers-container');
 
-console.log(categoriesCardContainer);
-for (let i = 0; i < 12; i++) {
-  const categoryCard = categoryCardFunc({
+for (let i = 0; i < 4; i++) {
+  const answer = button({
     onClick: () => console.log('hello'),
-    title: 'Portrait',
-    score: '5/10',
+    title: 'answer',
+    className: 'answer-button',
   });
-  categoriesCardContainer.appendChild(categoryCard)
-
-  console.log();
+  questionsAnswersContainer.appendChild(answer);
 }
 
-categoriesHTML.firstElementChild.appendChild(categoriesCardContainer);
+const closeButton = button({
+  onClick: () => console.log('hello'),
+  title: 'x',
+  className: 'close-quiz-button',
+});
+let questionHeader = questionHTML.querySelector('.question-header');
+questionHeader.insertAdjacentElement('afterbegin',closeButton)
+
+questionHTML.firstElementChild.appendChild(questionsAnswersContainer);
 
 
+let picture = new Image()
+picture.src = '../../../assets/image-data-master/full/0full.webp'
+console.log(picture);
+questionHTML.querySelector('.question-picture').appendChild(picture)
 
 let Question = {
   render: async () => {
-    let view = categoriesHTML;
+    let view = questionHTML;
     return view;
   },
   after_render: async () => {},

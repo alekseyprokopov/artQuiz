@@ -1,14 +1,9 @@
 let Error404 = {
-
-    render : async () => {
-        let view =  /*html*/`
-            <section class="section">
-                <h1> 404 Error </h1>
-            </section>
-        `
-        return view
-    }
-    , after_render: async () => {
-    }
-}
+  render: async () => {
+    let view = document.createElement('section');
+    view.innerHTML = '404 Error';
+    return view;
+  },
+  after_render: async () => {},
+};
 export default Error404;
