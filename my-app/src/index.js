@@ -1,9 +1,13 @@
 import './style.scss';
 
-import Home       from    './pages/1.home';
-import Settings   from    './pages/2.settings';
-import Categories from    './pages/3.categories';
-import Question   from    './pages/4.question';
+import Home from './pages/1.home/home';
+import Settings from './pages/2.settings/settings';
+import Artist from './pages/3.artist/artist';
+import AuthorQuestion from './pages/3.authorQuestion';
+
+// import PictureCategory from './pages/3.pictureCategory';
+
+// import QuestionPicture   from    './pages/4.question_picture';
 
 import Error404 from './views/pages/Error404.js';
 import PostShow from './views/pages/PostShow.js';
@@ -16,8 +20,13 @@ import Utils from './services/Utils.js';
 const routes = {
   '/': Home,
   '/settings': Settings,
-  '/categories': Categories,
-  '/question': Question,
+  '/artist': Artist,
+  '/author-question': AuthorQuestion,
+
+  // '/picture-category': PictureCategory,
+
+  // '/question': Question,
+  // '/question_picture': QuestionPicture,
 
   '/p/:id': PostShow,
   '/register': Register,
@@ -47,8 +56,10 @@ const router = async () => {
   // Get the page from our hash of supported routes.
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   let page = routes[parsedURL] ? routes[parsedURL] : Error404;
-  console.log(page.render());
-  content.appendChild(await page.render());
+
+  // content.innerHTML = '';
+  // content.appendChild(page);
+  content.innerHTML = await page.render();
   await page.after_render();
 };
 
@@ -57,5 +68,3 @@ window.addEventListener('hashchange', router);
 
 // Listen on page load:
 window.addEventListener('load', router);
-
-console.log('hello');

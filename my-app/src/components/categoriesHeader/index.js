@@ -4,7 +4,7 @@ import htmlToElement from '../../modules/htmlToElement';
 
 import logoFunc from '../logo';
 import settingsButtonFunction from '../settingsButton';
-
+import changeUrl from '../../modules/changeUrl';
 const categoriesHeader = htmlToElement(settingsHeaderDiv);
 
 const logo = logoFunc({
@@ -14,10 +14,10 @@ const logo = logoFunc({
 
 
 const settingsButton = settingsButtonFunction({
-  onClick: () => console.log('hello'),
+  onClick: () => changeUrl('settings'),
 });
 
-categoriesHeader.appendChild(logo);
+
 categoriesHeader.appendChild(settingsButton);
 
 

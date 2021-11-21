@@ -34,7 +34,7 @@ questionHTML.firstElementChild.appendChild(questionsAnswersContainer);
 
 let picture = new Image()
 picture.src = '../../../assets/image-data-master/full/0full.webp'
-console.log(picture);
+
 questionHTML.querySelector('.question-picture').appendChild(picture)
 
 let Question = {
@@ -44,4 +44,5 @@ let Question = {
   },
   after_render: async () => {},
 };
+
 export default Question;
