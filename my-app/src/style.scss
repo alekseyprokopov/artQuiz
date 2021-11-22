@@ -11,8 +11,7 @@ body {
   max-width: 1440px;
   margin: 0 auto;
 }
-.page_container{
-
+.page_container {
 }
 
 .container {
@@ -23,4 +22,28 @@ body {
 
 .hide-page {
   display: none;
+}
+
+.button {
+  display: inline-block;
+  width: 268px;
+  height: 56px;
+  border: 1px solid $font-color;
+  border-radius: 60px;
+  background: none;
+  font: $base-font;
+  color: $font-color;
+  &:hover{
+    color: black;
+    background:$button-hover-color;
+  }
+  &:active{
+    color: black;
+    background:$button-active-color;
+  }
+}
+
+.black-button {
+  border: 1px solid black;
+  color: black;
 }

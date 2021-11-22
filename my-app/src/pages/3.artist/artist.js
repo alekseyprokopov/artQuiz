@@ -26,37 +26,6 @@ let getData = async () => {
 
 let artistQuiz;
 
-// let categories = getData().then((data) => {
-//   artistQuiz = new Quiz(data.artistData);
-// });
-
-document.querySelector('.pageEntry').addEventListener('click', (e) => {
-  if (e.target.closest('.category-card')) {
-    artistQuiz.currentCategory = +e.target.closest('.category-card').id;
-    question_init(artistQuiz);
-  }
-});
-
-document.body.addEventListener('click', (e) => {
-  let isCorrect;
-  if (e.target.classList.contains('answer-button')) {
-    artistQuiz.guess(e.target.value);
-    question_init(artistQuiz);
-
-    // artistQuiz.guess(e.target.value);
-
-    console.log(artistQuiz.currentCategory);
-    // let categoryIndex = this.currentCategory;
-    // if (this.category[categoryIndex].getQuestionIndex().correctAnswer(answer))
-
-    console.log(
-      artistQuiz.category[artistQuiz.currentCategory].getQuestionIndex()
-    );
-
-    // question_init(artistQuiz)
-  }
-});
-
 let a;
 
 let Artist = {
@@ -108,3 +77,28 @@ let Artist = {
 Artist.render();
 
 export default Artist;
+
+//event listeners
+//клик по карточке
+document.querySelector('.pageEntry').addEventListener('click', (e) => {
+  if (e.target.closest('.category-card')) {
+    artistQuiz.currentCategory = +e.target.closest('.category-card').id;
+    question_init(artistQuiz);
+  }
+});
+
+//клик по ответу
+document.body.addEventListener('click', (e) => {
+  if (e.target.classList.contains('answer-button')) {
+    artistQuiz.guess(e.target.value);
+    question_init(artistQuiz);
+  }
+});
+
+//клик по кнопке закрытия
+eventClicker('close-quiz-button', async () => {
+  const content = null || document.getElementById('page_container');
+  content.innerHTML = await Artist.render()
+  // console.log(Artist.render());
+  // content.innerHTML = Artist.render();
+});

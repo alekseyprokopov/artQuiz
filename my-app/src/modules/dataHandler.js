@@ -4,7 +4,6 @@ import Quiz from '../components/classes/quiz';
 import Category from '../components/classes/category';
 import Question from '../components/classes/question';
 
-
 export default function handler(data) {
   let images = data.images;
 
@@ -54,8 +53,11 @@ export default function handler(data) {
         let choices = item[i].answers;
         let answer = item[i][type];
         let num = item[i].imageNum;
+        let name = item[i].name;
+        let author = item[i].author;
+        let year = item[i].year;
 
-        questions.push(new Question(choices,answer, num));
+        questions.push(new Question(choices, answer, num, name, author, year));
       }
       categories.push(new Category(questions));
     });

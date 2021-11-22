@@ -6,9 +6,6 @@ export default class Quiz {
     this.totalScore = 0;
     this.currentCategory = 0;
   }
-  getQuestionIndex() {
-    return this.questions[this.questionIndex];
-  }
 
   guess(answer) {
     let categoryIndex = this.currentCategory;

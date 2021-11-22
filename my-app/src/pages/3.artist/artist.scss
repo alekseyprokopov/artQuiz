@@ -35,7 +35,6 @@
   }
 }
 
-
 .button-settings {
   display: block;
   width: 30px;
@@ -55,5 +54,142 @@
     max-width: 166px;
     display: block;
     margin: 0 auto;
+  }
+}
+
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  // display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: black;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  // cursor: pointer; /* Add a pointer on hover */
+  .overlay-item {
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    border-radius: 20px;
+  }
+  .close-quiz {
+    display: none;
+    max-width: 580px;
+    width: 90%;
+    padding: 2%;
+    .close-card-button {
+      display: block;
+      border: none;
+      width: fit-content;
+      height: fit-content;
+      margin-right: 0;
+      margin-left: auto;
+    }
+    .close-quiz-text {
+      width: fit-content;
+      margin: 0 auto;
+      padding: 5% 20%;
+
+      text-align: center;
+    }
+  }
+
+  .correct-answer {
+    padding: 2%;
+  }
+}
+.close-cared-button {
+  color: black;
+}
+
+.button-close-quiz-container {
+  flex-wrap: nowrap;
+}
+
+.standard {
+  max-width: 520px;
+  // min-height: 80%;
+  width: 80%;
+  padding: 2%;
+  p {
+    width: fit-content;
+    margin: 0 auto;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .answer-picture {
+    position: relative;
+
+    img {
+      width: 100%;
+      border-radius: 20px;
+    }
+  }
+  button {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.correct-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: url('../../assets/svg/correct-logo.svg');
+  background-repeat: no-repeat;
+}
+
+.incorrect-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: url('../../assets/svg/incorrect-logo.svg');
+  background-repeat: no-repeat;
+}
+
+.correct-answer-name {
+  padding-top: 20px;
+  font-weight: 500;
+}
+
+.correct-answer-artist {
+  padding-bottom: 10px;
+  font: $base-font-small;
+  font-style: italic;
+}
+
+.result {
+  // display: none;
+
+  img {
+    display: block;
+    width: 65%;
+    margin: 0 auto;
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+
+  .result-congratulations{
+    font-weight: bold;
+    padding-bottom: 10%;
+  }
+
+  .result-score{
+    font-size: 50px;
+    font-weight: bold;
+
+    padding-bottom: 10%;
   }
 }
