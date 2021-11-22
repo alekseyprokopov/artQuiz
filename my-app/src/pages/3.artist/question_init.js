@@ -1,4 +1,5 @@
 import eventClicker from '../../modules/eventClicker';
+import animation from '../../modules/animation';
 
 export default function init(object) {
   // changeUrl('question')
@@ -75,7 +76,7 @@ export default function init(object) {
         <p class="result-congratulations">Congratulations!</p>
         <p class="result-score">${currentCategoryScore}/10</p>
         <div class="button-container button-close-quiz-container">
-          <button class="button black-button home-button">Home</button>
+          <button class="button black-button home-button" onclick="document.location='/#'">Home</a></button>
           <button class="button black-button nextQuiz-button">Next Quiz</button>
         </div>
       </div>
@@ -138,4 +139,5 @@ export default function init(object) {
 
   let container = document.querySelector('.pageEntry');
   container.innerHTML = question;
+  animation()
 }

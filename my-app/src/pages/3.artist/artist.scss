@@ -58,10 +58,10 @@
 }
 
 .overlay {
-  position: fixed; /* Sit on top of the page content */
-  // display: none; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -70,17 +70,9 @@
   background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   // cursor: pointer; /* Add a pointer on hover */
-  .overlay-item {
-    background-color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    border-radius: 20px;
-  }
+
   .close-quiz {
-    display: none;
+    visibility: hidden;
     max-width: 580px;
     width: 90%;
     padding: 2%;
@@ -104,7 +96,23 @@
   .correct-answer {
     padding: 2%;
   }
+  .active {
+    visibility: visible;
+  }
 }
+
+.overlay-item {
+  visibility: hidden;
+
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 20px;
+}
+
 .close-cared-button {
   color: black;
 }
@@ -181,15 +189,26 @@
     padding-bottom: 10%;
   }
 
-  .result-congratulations{
+  .result-congratulations {
     font-weight: bold;
     padding-bottom: 10%;
   }
 
-  .result-score{
+  .result-score {
     font-size: 50px;
     font-weight: bold;
 
     padding-bottom: 10%;
+  }
+}
+
+.active {
+  visibility: visible;
+}
+
+.home-button{
+  a{
+    display:block;
+    color: black;
   }
 }

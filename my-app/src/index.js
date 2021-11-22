@@ -16,6 +16,7 @@ import Register from './views/pages/Register.js';
 import Bottombar from './components/footer';
 
 import Utils from './services/Utils.js';
+import animation from './modules/animation';
 
 const routes = {
   '/': Home,
@@ -60,6 +61,12 @@ const router = async () => {
   // content.innerHTML = '';
   // content.appendChild(page);
   content.innerHTML = await page.render();
+  //animation
+  // content.classList.remove('run-animation');
+  // void content.offsetWidth;
+  // content.classList.add('run-animation');
+  animation()
+
   await page.after_render();
 };
 

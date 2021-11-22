@@ -7,6 +7,7 @@ import changeUrl from '../../modules/changeUrl';
 import dataHandler from '../../modules/dataHandler';
 import eventClicker from '../../modules/eventClicker';
 import question_init from './question_init';
+import animation from '../../modules/animation';
 
 //components:
 // import categoriesHeader from '../../components/categoriesHeader';
@@ -43,7 +44,7 @@ let Artist = {
           `<div class="category-card" id="${index}">
           <div class="category-card-header">
             <p class="category-title">level ${index + 1}</p>
-            <p class="category-score">${item.score}/10</p>
+            <p class="category-score">${item.result}/10</p>
           </div>
           <div class="category-card-preview">
           <img src="../../assets/image-data-master/img/${
@@ -90,15 +91,71 @@ document.querySelector('.pageEntry').addEventListener('click', (e) => {
 //клик по ответу
 document.body.addEventListener('click', (e) => {
   if (e.target.classList.contains('answer-button')) {
+    let answerCorrectCard = document.querySelector('.correct-answer');
+    let answerIncorrectCard = document.querySelector('.incorrect-answer');
+    let overlay = document.querySelector('.overlay');
+
+    overlay.classList.add('active');
+    //показать карточку взависимости от ответа
+    if (artistQuiz.isCorrect(e.target.value)) {
+      answerCorrectCard.classList.add('active');
+    } else {
+      answerIncorrectCard.classList.add('active');
+    }
+
     artistQuiz.guess(e.target.value);
-    question_init(artistQuiz);
+    // question_init(artistQuiz);
+  }
+});
+
+//клик по кнопке next
+document.body.addEventListener('click', (e) => {
+  let showResultCard = document.querySelector('.result');
+  let overlay = document.querySelector('.overlay');
+
+  if (e.target.classList.contains('next-button')) question_init(artistQuiz);
+  if (artistQuiz.isEnded()) {
+    overlay.classList.add('active');
+    showResultCard.classList.add('active');
   }
 });
 
 //клик по кнопке закрытия
 eventClicker('close-quiz-button', async () => {
+  let closeQuizCard = document.querySelector('.close-quiz');
+  let overlay = document.querySelector('.overlay');
+
+  overlay.classList.add('active');
+  closeQuizCard.classList.add('active');
+
+
+
+  // const content = null || document.getElementById('page_container');
+  // content.innerHTML = await Artist.render();
+  // animation();
+});
+
+//обработка кнопки закрытия
+eventClicker('close-card-button',()=>{
+  let closeQuizCard = document.querySelector('.close-quiz');
+  let overlay = document.querySelector('.overlay');
+
+  overlay.classList.remove('active');
+  closeQuizCard.classList.remove('active');
+});
+//обработка кнопки Cancel
+eventClicker('cancel-button',()=>{
+  let closeQuizCard = document.querySelector('.close-quiz');
+  let overlay = document.querySelector('.overlay');
+
+  overlay.classList.remove('active');
+  closeQuizCard.classList.remove('active');
+});
+
+//обработка кнопки Yes yes-button
+eventClicker('yes-button', async ()=>{
+  artistQuiz.questionIndexReset()
   const content = null || document.getElementById('page_container');
-  content.innerHTML = await Artist.render()
-  // console.log(Artist.render());
-  // content.innerHTML = Artist.render();
+  content.innerHTML = await Artist.render();
+  animation();
 });

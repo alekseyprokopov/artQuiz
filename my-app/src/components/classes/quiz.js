@@ -10,7 +10,6 @@ export default class Quiz {
   guess(answer) {
     let categoryIndex = this.currentCategory;
     if (this.category[categoryIndex].getQuestionIndex().correctAnswer(answer)) {
-      this.totalScore++;
       this.category[categoryIndex].score++;
     }
     this.category[categoryIndex].questionIndex++;
@@ -21,5 +20,31 @@ export default class Quiz {
       this.totalScore++;
       this.currentCategory = answer;
     }
+  }
+
+  isCorrect(answer) {
+    let categoryIndex = this.currentCategory;
+    return this.category[categoryIndex]
+      .getQuestionIndex()
+      .correctAnswer(answer);
+  }
+
+  isEnded() {
+    let categoryIndex = this.currentCategory;
+    let result =
+      this.category[categoryIndex].questions.length ===
+      this.category[categoryIndex].questionIndex;
+    console.log(this);
+    if (result) {
+      this.category[categoryIndex].result = this.category[categoryIndex].score;
+      this.totalScore += this.category[categoryIndex].result;
+      this.category[categoryIndex].score = 0;
+      this.category[categoryIndex].questionIndex = 0;
+    }
+    return result;
+  }
+  questionIndexReset() {
+    let categoryIndex = this.currentCategory;
+    this.category[categoryIndex].questionIndex = 0;
   }
 }
