@@ -57,7 +57,7 @@ let Artist = {
       .join('\n');
 
     let view = /*html*/ `
-    <section class="container categories-container">
+    <section class="container categories categories-container">
       <div class="categories-header">
         <div class="logo categories-logo">
           <img src="../../assets/svg/logo.svg" alt="art-quiz-logo" />
@@ -65,8 +65,9 @@ let Artist = {
         <div class="nav-bar">
           <a href="#">Home</a>
           <a href="#/artist">Categories</a>
+          <a class="button-settings" href="#/settings"></a>
         </div>
-        <a class="button-settings" href="#/settings"></a>
+
       </div>
       <div class="categories-card-container">${card}</div>
 </section>

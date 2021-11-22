@@ -14,7 +14,7 @@ let Settings = {
     let view = /*html*/ `
     <section class="section settings">
       <div class="container settings-container">
-        <button class="button settings-header">Settings</button>
+        <a href="#/" class="settings-header">Settings</a>
         <!-- volume range -->
         <div class="settingsVolumeRange">
           <p class="settings-volume-title">Volume</p>
