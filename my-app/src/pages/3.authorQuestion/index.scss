@@ -1,11 +1,6 @@
 @import '../../styles/vars.scss';
 
-.question-container {
-  position: relative;
-  width: min-content;
-  margin: 0 auto;
-  
-}
+
 
 .question-header {
   display: flex;
@@ -34,44 +29,5 @@
     display: block;
     width: auto;
     // height: auto;
-  }
-}
-
-.question-picture {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  width: min-content;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  position: relative;
-
-  img {
-    width: 90vw;
-    max-width: 850px;
-    box-sizing: content-box;
-    height: auto;
-    border-radius: 20px;
-    // padding: auto 20px;
-  }
-}
-
-.question-pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  bottom: 20px;
-  left: 50%;
-  transform: translate(-50%);
-  gap: 5px;
-  position: absolute;
-
-  li {
-    width: 10px;
-    height: 10px;
-    background: #a4a4a4;
-    border-radius: 50%;
   }
 }
