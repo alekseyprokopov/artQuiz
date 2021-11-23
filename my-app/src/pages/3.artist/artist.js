@@ -1,4 +1,5 @@
-//
+// console.log(correctAnswer_audio_play);
+
 import './artist.scss';
 
 //functions
@@ -8,6 +9,9 @@ import dataHandler from '../../modules/dataHandler';
 import eventClicker from '../../modules/eventClicker';
 import question_init from './question_init';
 import animation from '../../modules/animation';
+import play_correct_answer from '../../modules/play_correct_answer';
+import play_wrong_answer from '../../modules/play_wrong_answer';
+import play_endround from '../../modules/play_endround';
 
 //components:
 // import categoriesHeader from '../../components/categoriesHeader';
@@ -100,8 +104,10 @@ document.body.addEventListener('click', (e) => {
     //показать карточку взависимости от ответа
     if (artistQuiz.isCorrect(e.target.value)) {
       answerCorrectCard.classList.add('active');
+      play_correct_answer();
     } else {
       answerIncorrectCard.classList.add('active');
+      play_wrong_answer();
     }
 
     artistQuiz.guess(e.target.value);
@@ -118,6 +124,7 @@ document.body.addEventListener('click', (e) => {
   if (artistQuiz.isEnded()) {
     overlay.classList.add('active');
     showResultCard.classList.add('active');
+    play_endround();
   }
 });
 
@@ -129,15 +136,13 @@ eventClicker('close-quiz-button', async () => {
   overlay.classList.add('active');
   closeQuizCard.classList.add('active');
 
-
-
   // const content = null || document.getElementById('page_container');
   // content.innerHTML = await Artist.render();
   // animation();
 });
 
 //обработка кнопки закрытия
-eventClicker('close-card-button',()=>{
+eventClicker('close-card-button', () => {
   let closeQuizCard = document.querySelector('.close-quiz');
   let overlay = document.querySelector('.overlay');
 
@@ -145,7 +150,7 @@ eventClicker('close-card-button',()=>{
   closeQuizCard.classList.remove('active');
 });
 //обработка кнопки Cancel
-eventClicker('cancel-button',()=>{
+eventClicker('cancel-button', () => {
   let closeQuizCard = document.querySelector('.close-quiz');
   let overlay = document.querySelector('.overlay');
 
@@ -154,8 +159,8 @@ eventClicker('cancel-button',()=>{
 });
 
 //обработка кнопки Yes yes-button
-eventClicker('yes-button', async ()=>{
-  artistQuiz.questionIndexReset()
+eventClicker('yes-button', async () => {
+  artistQuiz.questionIndexReset();
   const content = null || document.getElementById('page_container');
   content.innerHTML = await Artist.render();
   animation();

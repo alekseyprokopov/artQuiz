@@ -4,10 +4,26 @@ import './settings.scss';
 import changeUrl from '../../modules/changeUrl';
 import oldHashReturn from '../../modules/oldHashReturn';
 import eventClicker from '../../modules/eventClicker';
+import play from '../../modules/playAudio';
 
-//listeners
-eventClicker(('button', 'settings-header'), oldHashReturn);
+let click_audio = document.querySelector('.click_audio');
+let correctAnswer_audio = document.querySelector('.correctAnswer_audio');
+let wrongAnswer_audio = document.querySelector('.wrongAnswer_audio');
+let endround_audio = document.querySelector('.wrongAnswer_audio');
 
+let audios = document.querySelectorAll('audio');
+
+let settings = {
+  volumeValue: 0,
+  TimerSwitcher: false,
+  TimerTime: 5,
+};
+
+audios.forEach((item) => (item.volume = settings.volumeValue));
+
+function correctAnswer_audio_play() {
+  play(correctAnswer_audio);
+}
 
 let Settings = {
   render: async () => {
@@ -19,10 +35,10 @@ let Settings = {
         <div class="settingsVolumeRange">
           <p class="settings-volume-title">Volume</p>
           <div class="settings-volume-params">
-            <input type="range" name="volume-range" id="volume-range" />
+            <input class="input-volume-range" type="range" name="volume-range" id="volume-range" min="0" max="1" value="${settings.volumeValue}" step="0.05"/>
             <div class="settings-volume-icons">
-              <img src="../../assets/svg/speaker-off.svg" alt="speaker-off" />
-              <img src="../../assets/svg/speaker-on.svg" alt="speaker-on" />
+              <img class="speaker-off" src="../../assets/svg/speaker-off.svg" alt="speaker-off" />
+              <img class="speaker-on" src="../../assets/svg/speaker-on.svg" alt="speaker-on" />
             </div>
           </div>
         </div>
@@ -64,3 +80,41 @@ let Settings = {
 };
 
 export default Settings;
+
+//listeners
+//звук клика
+document.addEventListener('click', (e) => {
+  if (
+    e.target.tagName == 'BUTTON' ||
+    e.target.tagName == 'A' ||
+    e.target.tagName == 'INPUT'
+  ) {
+    play(click_audio);
+  }
+});
+
+//изменение громскости
+document.addEventListener('change', (e) => {
+  if (e.target.classList.contains('input-volume-range')) {
+    settings.volumeValue = e.target.value;
+    audios.forEach((item) => {
+      item.volume = e.target.value;
+      play(click_audio);
+    });
+  }
+});
+
+eventClicker('speaker-off', () => {
+  let volumeRange = document.querySelector('.input-volume-range');
+  volumeRange.value = 0;
+  settings.volumeValue = 0;
+  audios.forEach((item) => (item.volume = 0));
+});
+
+eventClicker('speaker-on', () => {
+  let volumeRange = document.querySelector('.input-volume-range');
+  volumeRange.value = 0.5;
+  settings.volumeValue = 0.5;
+  audios.forEach((item) => (item.volume = 0.5));
+  play(click_audio);
+});

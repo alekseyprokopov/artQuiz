@@ -7,7 +7,7 @@
 .settings-container {
   position: relative;
   display: flex;
-  gap:5%;
+  gap: 5%;
   flex-direction: column;
   justify-content: center;
   height: 100vh;
@@ -29,7 +29,7 @@
 
 .settings-header {
   position: absolute;
-  top:0;
+  top: 0;
   display: block;
   color: $font-color;
   border: none;
@@ -56,10 +56,15 @@
       padding: auto $gap-gor;
       margin: 0 auto;
       height: 2px;
+      cursor: pointer;
     }
     .settings-volume-icons {
+      padding-top: 5px;
       display: flex;
       justify-content: space-between;
+      img{
+        cursor:pointer;
+      }
     }
   }
 }
