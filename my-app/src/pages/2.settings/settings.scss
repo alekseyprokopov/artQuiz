@@ -7,7 +7,7 @@
 .settings-container {
   position: relative;
   display: flex;
-  gap: 5%;
+  gap: 2%;
   flex-direction: column;
   justify-content: center;
   height: 100vh;
@@ -33,6 +33,7 @@
   display: block;
   color: $font-color;
   border: none;
+  cursor: pointer;
   width: fit-content;
 }
 .settings-header::before {
@@ -62,8 +63,8 @@
       padding-top: 5px;
       display: flex;
       justify-content: space-between;
-      img{
-        cursor:pointer;
+      img {
+        cursor: pointer;
       }
     }
   }
@@ -142,6 +143,15 @@
 }
 
 // TimeToAnswer
+.no-active {
+  opacity: 0.5;
+  div {
+    button {
+      cursor: default;
+    }
+  }
+}
+
 .settings-TimeToAnswer-params {
   padding-top: 10px;
   padding-bottom: 30px;

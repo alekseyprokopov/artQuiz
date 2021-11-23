@@ -1,4 +1,3 @@
-
 import './home.scss';
 
 let Home = {
@@ -17,7 +16,7 @@ let Home = {
       </div>
     </section>
     `;
-    return view
+    return view;
   },
   after_render: async () => {},
 };

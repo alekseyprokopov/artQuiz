@@ -65,7 +65,7 @@ const router = async () => {
   // content.classList.remove('run-animation');
   // void content.offsetWidth;
   // content.classList.add('run-animation');
-  animation()
+  animation();
 
   await page.after_render();
 };
@@ -75,3 +75,7 @@ window.addEventListener('hashchange', router);
 
 // Listen on page load:
 window.addEventListener('load', router);
+
+console.log(
+  'Привет, у меня небольшая просьба к вам. Я пока не успел закончить проект.Если не составит трудностей, проверьте, меня, пожалуйста, в четверг или хотя бы в среду вечером. Спасибо'
+);

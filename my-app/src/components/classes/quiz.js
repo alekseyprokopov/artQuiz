@@ -34,7 +34,6 @@ export default class Quiz {
     let result =
       this.category[categoryIndex].questions.length ===
       this.category[categoryIndex].questionIndex;
-    console.log(this);
     if (result) {
       this.category[categoryIndex].result = this.category[categoryIndex].score;
       this.totalScore += this.category[categoryIndex].result;
