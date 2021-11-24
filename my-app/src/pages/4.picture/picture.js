@@ -1,6 +1,6 @@
 // console.log(correctAnswer_audio_play);
 
-import './artist.scss';
+import './picture.scss';
 import './question.scss';
 
 //functions
@@ -40,31 +40,30 @@ let getData = async () => {
   return dataHandler(data);
 };
 
-let artistQuiz;
+let pictureQuiz;
 
 let result = {};
-result.name = 'artist';
+result.name = 'picture';
 
 window.addEventListener('load', () => getLocalStorage(result));
 
 window.addEventListener('beforeunload', () => setLocalStorage(result));
 
-
-let Artist = {
+let Picture = {
   render: async () => {
-    if (!artistQuiz) {
+    if (!pictureQuiz) {
       let data = await getData();
-      artistQuiz = new Quiz(data.artistData, 'artist');
+      pictureQuiz = new Quiz(data.pictureData, 'picture');
     }
     console.log(result.category);
     if (result.category) {
-      setLocalResult(result, artistQuiz);
+      setLocalResult(result, pictureQuiz);
     }
-    let category = artistQuiz.category;
+    let category = pictureQuiz.category;
 
     let card = category
       .map((item, index) => {
-        return `<div class="category-card ${
+        return `<div class="pic-category-card ${
           item.isPassed ? '' : 'monochrome'
         }" id="${index}" >
           <div class="category-card-header">
@@ -74,11 +73,11 @@ let Artist = {
         }/10</p>
           </div>
           <div class="category-card-preview">
-            <a href="#/artist-result"class="star ${
+            <a href="#/picture-result"class="star ${
               item.isPassed ? '' : 'no-active'
             }"></a>
 
-            <img class="category-card-image" src="../../assets/image-data-master/img/${
+            <img class="pic-category-card-image" src="../../assets/image-data-master/img/${
               item.questions[0].num
             }.jpg" alt="category-preview">
             <div class="category-card-footer">Play</div>
@@ -97,7 +96,7 @@ let Artist = {
         </div>
         <div class="nav-bar">
           <a href="#">Home</a>
-          <a class='nav-bar-categories' href="#/artist">Categories</a>
+          <a class='nav-bar-categories' href="#/picture">Categories</a>
           <a class="button-settings" href="#/settings"></a>
         </div>
 
@@ -110,23 +109,23 @@ let Artist = {
   after_render: async () => {},
 };
 
-export default Artist;
+export default Picture;
 
 //event listeners
 //клик по карточке
 document.querySelector('.pageEntry').addEventListener('click', (e) => {
-  if (e.target.classList.contains('category-card-image')) {
-    artistQuiz.currentCategory = +e.target.closest('.category-card').id;
-    result.currentCategory = +e.target.closest('.category-card').id;
-    Object.assign(result, artistQuiz);
+  if (e.target.classList.contains('pic-category-card-image')) {
+    pictureQuiz.currentCategory = +e.target.closest('.pic-category-card').id;
+    result.currentCategory = +e.target.closest('.pic-category-card').id;
+    Object.assign(result, pictureQuiz);
     setLocalStorage(result);
-    question_init(artistQuiz);
+    question_init(pictureQuiz);
     if (settings.TimerSwitcher) timerWTF();
   }
   if (e.target.classList.contains('star')) {
-    artistQuiz.currentCategory = +e.target.closest('.category-card').id;
-    result.currentCategory = +e.target.closest('.category-card').id;
-    Object.assign(result, artistQuiz);
+    pictureQuiz.currentCategory = +e.target.closest('.pic-category-card').id;
+    result.currentCategory = +e.target.closest('.pic-category-card').id;
+    Object.assign(result, pictureQuiz);
     setLocalStorage(result);
   }
 });
@@ -138,13 +137,13 @@ function timerWTF() {
 
     overlay.classList.add('active');
     answerIncorrectCard.classList.add('active');
-    artistQuiz.guess('');
+    pictureQuiz.guess('');
   });
 }
 
 //клик по ответу
 document.body.addEventListener('click', (e) => {
-  if (e.target.classList.contains('answer-button')) {
+  if (e.target.classList.contains('answer-button-picture')) {
     let answerCorrectCard = document.querySelector('.correct-answer');
     let answerIncorrectCard = document.querySelector('.incorrect-answer');
     let overlay = document.querySelector('.overlay');
@@ -153,10 +152,10 @@ document.body.addEventListener('click', (e) => {
     intervalKill();
 
     //копирование результатов
-    Object.assign(result, artistQuiz);
+    Object.assign(result, pictureQuiz);
     setLocalStorage(result);
     //показать карточку взависимости от ответа
-    if (artistQuiz.isCorrect(e.target.value)) {
+    if (pictureQuiz.isCorrect(e.target.id)) {
       answerCorrectCard.classList.add('active');
       play_correct_answer();
     } else {
@@ -164,8 +163,8 @@ document.body.addEventListener('click', (e) => {
       play_wrong_answer();
     }
 
-    artistQuiz.guess(e.target.value);
-    // question_init(artistQuiz);
+    pictureQuiz.guess(e.target.id);
+    // question_init(pictureQuiz);
   }
 });
 
@@ -173,14 +172,14 @@ document.body.addEventListener('click', (e) => {
 document.body.addEventListener('click', (e) => {
   let showResultCard = document.querySelector('.result');
   let overlay = document.querySelector('.overlay');
-  Object.assign(result, artistQuiz);
+  Object.assign(result, pictureQuiz);
   setLocalStorage(result);
 
   if (e.target.classList.contains('next-button')) {
-    question_init(artistQuiz);
+    question_init(pictureQuiz);
     if (settings.TimerSwitcher) timerWTF();
   }
-  if (artistQuiz.isEnded()) {
+  if (pictureQuiz.isEnded()) {
     overlay.classList.add('active');
     showResultCard.classList.add('active');
     play_endround();
@@ -194,6 +193,7 @@ eventClicker('close-quiz-button', async () => {
 
   overlay.classList.add('active');
   closeQuizCard.classList.add('active');
+  intervalKill();
 });
 
 //обработка кнопки закрытия
@@ -215,15 +215,15 @@ eventClicker('cancel-button', () => {
 
 //обработка кнопки Yes yes-button
 eventClicker('yes-button', async () => {
-  artistQuiz.questionIndexReset();
+  pictureQuiz.questionIndexReset();
   const content = null || document.getElementById('page_container');
-  content.innerHTML = await Artist.render();
+  content.innerHTML = await Picture.render();
   animation();
 });
 
 //next Quiz
 eventClicker('nextQuiz-button', async () => {
   const content = null || document.getElementById('page_container');
-  content.innerHTML = await Artist.render();
+  content.innerHTML = await Picture.render();
   animation();
 });

@@ -1,5 +1,3 @@
-import Question from '../../pages/3.authorQuestion';
-
 export default class Quiz {
   constructor(category, name) {
     this.category = category;

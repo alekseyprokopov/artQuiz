@@ -2,10 +2,11 @@
 
 .question-header {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-
+  align-self: flex-start;
   .close-quiz-button {
     width: fit-content;
     border: none;

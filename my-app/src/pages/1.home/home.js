@@ -10,10 +10,9 @@ let Home = {
         <div class="logo main-logo">
           <img src="../../assets/svg/logo.svg" alt="art-quiz-logo" />
         </div>
-        <div class="" style='color:red; text-align:center'>"Здравствуйте. Откройте, пожалуйста, консоль"</div>
         <div class="button-container">
           <a href="#/artist"><button class="button custom-button">Artist quiz</button></a>
-          <a href="#/picture-category"><button class="button custom-button">Pictures quiz</button></a>
+          <a href="#/picture"><button class="button custom-button">Pictures quiz</button></a>
         </div>
       </div>
     </section>

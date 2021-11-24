@@ -2,8 +2,13 @@ import './style.scss';
 
 import Home from './pages/1.home/home';
 import Settings from './pages/2.settings/settings';
+
 import Artist from './pages/3.artist/artist';
 import ArtistResult from './pages/3.artist/artist_result';
+
+import Picture from './pages/4.picture/picture';
+import PictureResult from './pages/4.picture/picture_result';
+
 
 // import PictureCategory from './pages/3.pictureCategory';
 
@@ -23,6 +28,8 @@ const routes = {
   '/settings': Settings,
   '/artist': Artist,
   '/artist-result': ArtistResult,
+  '/picture': Picture,
+  '/picture-result': PictureResult,
 
 
 
