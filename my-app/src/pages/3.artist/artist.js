@@ -41,15 +41,18 @@ let getData = async () => {
 };
 
 let artistQuiz;
-let result = { name: 'artist' };
-window.addEventListener('beforeunload', () => setLocalStorage(result));
+
+let result = {};
+result.name = 'artist';
+
 window.addEventListener('load', () => getLocalStorage(result));
 
-document.addEventListener('click', (e) => {
-  // if (e.target.tagName == 'BUTTON') {
-  //   Object.assign(result, artistQuiz);
-  //   // setLocalResult(result, artistQuiz)
-  // }
+window.addEventListener('beforeunload', () => setLocalStorage(result));
+
+// window.addEventListener('hashchange', () => setLocalStorage(artistQuiz.name));
+// window.addEventListener('beforeunload', () => setLocalStorage(artistQuiz.name));
+
+document.addEventListener('click', () => {
   console.log(result);
   console.log(artistQuiz);
 });
@@ -59,10 +62,10 @@ let Artist = {
     if (!artistQuiz) {
       let data = await getData();
       artistQuiz = new Quiz(data.artistData, 'artist');
-      if (result.category) {
-        setLocalResult(result, artistQuiz);
-      }
-      // Object.assign(result, artistQuiz);
+    }
+    console.log(result.category);
+    if (result.category) {
+      setLocalResult(result, artistQuiz);
     }
     let category = artistQuiz.category;
 
@@ -78,7 +81,9 @@ let Artist = {
         }/10</p>
           </div>
           <div class="category-card-preview">
-            <div class="star ${item.isPassed ? '' : 'no-active'}"></div>
+            <a href="#/artist-result"class="star ${
+              item.isPassed ? '' : 'no-active'
+            }"></a>
 
             <img class="category-card-image" src="../../assets/image-data-master/img/${
               item.questions[0].num
@@ -99,7 +104,7 @@ let Artist = {
         </div>
         <div class="nav-bar">
           <a href="#">Home</a>
-          <a href="#/artist">Categories</a>
+          <a class='nav-bar-categories' href="#/artist">Categories</a>
           <a class="button-settings" href="#/settings"></a>
         </div>
 
@@ -111,7 +116,6 @@ let Artist = {
   },
   after_render: async () => {},
 };
-Artist.render();
 
 export default Artist;
 
@@ -120,8 +124,17 @@ export default Artist;
 document.querySelector('.pageEntry').addEventListener('click', (e) => {
   if (e.target.classList.contains('category-card-image')) {
     artistQuiz.currentCategory = +e.target.closest('.category-card').id;
+    result.currentCategory = +e.target.closest('.category-card').id;
+    Object.assign(result, artistQuiz);
+    setLocalStorage(result);
     question_init(artistQuiz);
     if (settings.TimerSwitcher) timerWTF();
+  }
+  if (e.target.classList.contains('star')) {
+    artistQuiz.currentCategory = +e.target.closest('.category-card').id;
+    result.currentCategory = +e.target.closest('.category-card').id;
+    Object.assign(result, artistQuiz);
+    setLocalStorage(result);
   }
 });
 
@@ -148,6 +161,7 @@ document.body.addEventListener('click', (e) => {
 
     //копирование результатов
     Object.assign(result, artistQuiz);
+    setLocalStorage(result);
     //показать карточку взависимости от ответа
     if (artistQuiz.isCorrect(e.target.value)) {
       answerCorrectCard.classList.add('active');
@@ -166,6 +180,8 @@ document.body.addEventListener('click', (e) => {
 document.body.addEventListener('click', (e) => {
   let showResultCard = document.querySelector('.result');
   let overlay = document.querySelector('.overlay');
+  Object.assign(result, artistQuiz);
+  setLocalStorage(result);
 
   if (e.target.classList.contains('next-button')) {
     question_init(artistQuiz);
@@ -211,6 +227,13 @@ eventClicker('cancel-button', () => {
 //обработка кнопки Yes yes-button
 eventClicker('yes-button', async () => {
   artistQuiz.questionIndexReset();
+  const content = null || document.getElementById('page_container');
+  content.innerHTML = await Artist.render();
+  animation();
+});
+
+//next Quiz
+eventClicker('nextQuiz-button', async () => {
   const content = null || document.getElementById('page_container');
   content.innerHTML = await Artist.render();
   animation();

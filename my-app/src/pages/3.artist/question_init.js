@@ -13,10 +13,7 @@ window.addEventListener('load', () => localStorageGet(settings));
 window.addEventListener('hashchange', () => localStorageGet(settings));
 
 export default function init(object, hasTimer) {
-  // changeUrl('question')
   let currentCategory = object.currentCategory;
-  console.log(object.category[currentCategory]);
-  console.log(object);
 
   let currentCategoryScore = object.category[currentCategory].score;
   let currentQuestionIndex = object.category[currentCategory].questionIndex;
@@ -90,7 +87,7 @@ export default function init(object, hasTimer) {
         <p class="result-score">${currentCategoryScore}/10</p>
         <div class="button-container button-close-quiz-container">
           <button class="button black-button home-button" onclick="document.location='/#'">Home</a></button>
-          <button class="button black-button nextQuiz-button">Next Quiz</button>
+          <button class="button black-button nextQuiz-button" >Next Quiz</button>
         </div>
       </div>
 

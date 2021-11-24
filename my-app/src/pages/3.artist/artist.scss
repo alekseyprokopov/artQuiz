@@ -29,6 +29,15 @@
   a {
     color: #fff;
   }
+  .nav-bar-categories {
+    color: $button-active-color;
+  }
+  a:hover {
+    color: $button-hover-color;
+  }
+  a:active {
+    color: $button-active-color;
+  }
 }
 .category-card {
   max-width: 200px;
@@ -44,7 +53,8 @@
     }
   }
 
-  .category-card-footer {
+  .category-card-footer,
+  .category-card-footer-results {
     position: absolute;
     bottom: 0;
     text-align: center;
@@ -100,6 +110,10 @@
 
 .category-card-preview:hover {
   .category-card-footer {
+    transition: transform 0.3s linear;
+    transform: translate(0, 0);
+  }
+  .category-card-footer-results {
     transition: transform 0.3s linear;
     transform: translate(0, 0);
   }

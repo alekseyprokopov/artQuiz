@@ -3,7 +3,7 @@ import './style.scss';
 import Home from './pages/1.home/home';
 import Settings from './pages/2.settings/settings';
 import Artist from './pages/3.artist/artist';
-import AuthorQuestion from './pages/3.authorQuestion';
+import ArtistResult from './pages/3.artist/artist_result';
 
 // import PictureCategory from './pages/3.pictureCategory';
 
@@ -22,7 +22,9 @@ const routes = {
   '/': Home,
   '/settings': Settings,
   '/artist': Artist,
-  '/author-question': AuthorQuestion,
+  '/artist-result': ArtistResult,
+
+
 
   // '/picture-category': PictureCategory,
 
