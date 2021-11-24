@@ -1,5 +1,5 @@
 import question from './index.html';
-import './index.scss';
+// import './index.scss';
 
 //functions
 import htmlToElement from '../../modules/htmlToElement';

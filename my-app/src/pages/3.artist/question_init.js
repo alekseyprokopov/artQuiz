@@ -1,7 +1,18 @@
 import eventClicker from '../../modules/eventClicker';
 import animation from '../../modules/animation';
+import localStorageGet from '../../modules/localStorageGet';
+import timer from '../../modules/timer'
 
-export default function init(object) {
+let settings = {
+  volumeValue: null,
+  TimerSwitcher: null,
+  TimerTime: null,
+  name: 'settings',
+};
+window.addEventListener('load', () => localStorageGet(settings));
+window.addEventListener('hashchange', () => localStorageGet(settings));
+
+export default function init(object, hasTimer) {
   // changeUrl('question')
 
   let currentCategory = object.currentCategory;
@@ -103,10 +114,10 @@ export default function init(object) {
     <section class="question">
       ${overlay}
       <div class="container question-container">
-        <div class="question-header">
+        <div class="question-header ${settings.TimerSwitcher?'':'no-active'}">
           <button class="button close-quiz-button">x</button>
           <div class="timer-line"></div>
-          <p class="timer-text">0:00</p>
+          <p class="timer-text">${settings.TimerTime}</p>
         </div>
         <p class="answer-title">Who is the author of this picture?</p>
         <div class="question-picture">
@@ -140,4 +151,5 @@ export default function init(object) {
   let container = document.querySelector('.pageEntry');
   container.innerHTML = question;
   animation()
+  if (hasTimer){}
 }

@@ -29,3 +29,13 @@
     width: 100%;
   }
 }
+
+.button-settings {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url('../../assets/svg/settings.svg');
+  background-size: 30px 30px;
+  background-repeat:no-repeat;
+  cursor: pointer;
+}

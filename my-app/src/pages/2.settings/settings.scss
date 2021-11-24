@@ -143,8 +143,15 @@
 }
 
 // TimeToAnswer
+.settingsTimeToAnswer {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+}
 .no-active {
-  opacity: 0.5;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
   div {
     button {
       cursor: default;

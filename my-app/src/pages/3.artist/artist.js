@@ -1,6 +1,7 @@
 // console.log(correctAnswer_audio_play);
 
 import './artist.scss';
+import './question.scss';
 
 //functions
 
@@ -12,15 +13,23 @@ import animation from '../../modules/animation';
 import play_correct_answer from '../../modules/play_correct_answer';
 import play_wrong_answer from '../../modules/play_wrong_answer';
 import play_endround from '../../modules/play_endround';
-
+import timer from '../../modules/timer';
+import intervalKill from '../../modules/intervalKill';
+import getLocalStorage from '../../modules/localStorageGet';
 //components:
-// import categoriesHeader from '../../components/categoriesHeader';
-import categoryCardFunc from '../../components/category-card';
 import Quiz from '../../components/classes/quiz';
-// const categoriesHTML = htmlToElement(categories);
 
 let categoriesCardContainer = document.createElement('div');
 categoriesCardContainer.classList.add('categories-card-container');
+
+let settings = {
+  volumeValue: null,
+  TimerSwitcher: null,
+  TimerTime: null,
+  name: 'settings',
+};
+window.addEventListener('load', () => getLocalStorage(settings));
+window.addEventListener('hashchange', () => getLocalStorage(settings));
 
 let getData = async () => {
   let url = '../assets/image-data-master/images.json';
@@ -30,8 +39,6 @@ let getData = async () => {
 };
 
 let artistQuiz;
-
-let a;
 
 let Artist = {
   render: async () => {
@@ -47,7 +54,7 @@ let Artist = {
         (item, index) =>
           `<div class="category-card" id="${index}">
           <div class="category-card-header">
-            <p class="category-title">level ${index + 1}</p>
+            <p class="category-title">Round ${index + 1}</p>
             <p class="category-score">${item.result}/10</p>
           </div>
           <div class="category-card-preview">
@@ -90,8 +97,20 @@ document.querySelector('.pageEntry').addEventListener('click', (e) => {
   if (e.target.closest('.category-card')) {
     artistQuiz.currentCategory = +e.target.closest('.category-card').id;
     question_init(artistQuiz);
+    if (settings.TimerSwitcher) timerWTF();
   }
 });
+
+function timerWTF() {
+  timer(settings.TimerTime, () => {
+    let answerIncorrectCard = document.querySelector('.incorrect-answer');
+    let overlay = document.querySelector('.overlay');
+
+    overlay.classList.add('active');
+    answerIncorrectCard.classList.add('active');
+    artistQuiz.guess('');
+  });
+}
 
 //клик по ответу
 document.body.addEventListener('click', (e) => {
@@ -101,6 +120,7 @@ document.body.addEventListener('click', (e) => {
     let overlay = document.querySelector('.overlay');
 
     overlay.classList.add('active');
+    intervalKill();
     //показать карточку взависимости от ответа
     if (artistQuiz.isCorrect(e.target.value)) {
       answerCorrectCard.classList.add('active');
@@ -120,7 +140,10 @@ document.body.addEventListener('click', (e) => {
   let showResultCard = document.querySelector('.result');
   let overlay = document.querySelector('.overlay');
 
-  if (e.target.classList.contains('next-button')) question_init(artistQuiz);
+  if (e.target.classList.contains('next-button')) {
+    question_init(artistQuiz);
+    if (settings.TimerSwitcher) timerWTF();
+  }
   if (artistQuiz.isEnded()) {
     overlay.classList.add('active');
     showResultCard.classList.add('active');
