@@ -28,7 +28,7 @@ let Settings = {
     let view = /*html*/ `
     <section class="section settings">
       <div class="container settings-container">
-        <a  class="settings-header">Settings</a>
+        <a  class="settings-header" onclick='history.back()'>Settings</a>
         <!-- volume range -->
         <div class="settingsVolumeRange">
           <p class="settings-volume-title">Volume</p>
@@ -86,7 +86,6 @@ let Settings = {
 };
 
 //listeners
-eventClicker('settings-header', () => oldHashReturn());
 
 //звук клика
 document.addEventListener('click', (e) => {

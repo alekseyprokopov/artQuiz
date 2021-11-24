@@ -1,5 +1,3 @@
-// console.log(correctAnswer_audio_play);
-
 import './picture.scss';
 import './question.scss';
 
@@ -55,7 +53,6 @@ let Picture = {
       let data = await getData();
       pictureQuiz = new Quiz(data.pictureData, 'picture');
     }
-    console.log(result.category);
     if (result.category) {
       setLocalResult(result, pictureQuiz);
     }
@@ -179,11 +176,12 @@ document.body.addEventListener('click', (e) => {
     question_init(pictureQuiz);
     if (settings.TimerSwitcher) timerWTF();
   }
-  if (pictureQuiz.isEnded()) {
-    overlay.classList.add('active');
-    showResultCard.classList.add('active');
-    play_endround();
-  }
+  if (pictureQuiz)
+    if (pictureQuiz.isEnded()) {
+      overlay.classList.add('active');
+      showResultCard.classList.add('active');
+      play_endround();
+    }
 });
 
 //клик по кнопке закрытия

@@ -26,7 +26,7 @@ let ArtistResult = {
           isCorrectResult ? '' : 'monochrome'
         }" id="${index}" >
 
-          <div class="category-card-preview">
+          <div class="category-card-preview-result">
 
             <img class="category-card-image" src="../../assets/image-data-master/img/${imageNum}.jpg" alt="category-preview">
             <div class="category-card-footer-results">${

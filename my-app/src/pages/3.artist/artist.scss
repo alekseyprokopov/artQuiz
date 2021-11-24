@@ -40,6 +40,7 @@
   }
 }
 .category-card,
+.category-card-result,
 .pic-category-card {
   max-width: 200px;
   max-height: 250px;
@@ -86,7 +87,9 @@
     background-repeat: no-repeat;
   }
 
-  .category-card-preview {
+  .category-card-preview,
+  .pic-category-card-preview,
+  .category-card-preview-result {
     cursor: pointer;
     position: relative;
     .star {

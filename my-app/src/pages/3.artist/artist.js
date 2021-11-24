@@ -1,5 +1,3 @@
-// console.log(correctAnswer_audio_play);
-
 import './artist.scss';
 import './question.scss';
 
@@ -49,14 +47,12 @@ window.addEventListener('load', () => getLocalStorage(result));
 
 window.addEventListener('beforeunload', () => setLocalStorage(result));
 
-
 let Artist = {
   render: async () => {
     if (!artistQuiz) {
       let data = await getData();
       artistQuiz = new Quiz(data.artistData, 'artist');
     }
-    console.log(result.category);
     if (result.category) {
       setLocalResult(result, artistQuiz);
     }
@@ -180,11 +176,12 @@ document.body.addEventListener('click', (e) => {
     question_init(artistQuiz);
     if (settings.TimerSwitcher) timerWTF();
   }
-  if (artistQuiz.isEnded()) {
-    overlay.classList.add('active');
-    showResultCard.classList.add('active');
-    play_endround();
-  }
+  if (artistQuiz)
+    if (artistQuiz.isEnded() || false) {
+      overlay.classList.add('active');
+      showResultCard.classList.add('active');
+      play_endround();
+    }
 });
 
 //клик по кнопке закрытия
