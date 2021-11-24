@@ -1,16 +1,19 @@
 import Question from '../../pages/3.authorQuestion';
 
 export default class Quiz {
-  constructor(category) {
+  constructor(category, name) {
     this.category = category;
     this.totalScore = 0;
     this.currentCategory = 0;
+    this.name = name;
   }
 
   guess(answer) {
     let categoryIndex = this.currentCategory;
+
     if (this.category[categoryIndex].getQuestionIndex().correctAnswer(answer)) {
       this.category[categoryIndex].score++;
+      this.category[categoryIndex].getQuestionIndex().isCorrect = true;
     }
     this.category[categoryIndex].questionIndex++;
   }
@@ -39,6 +42,12 @@ export default class Quiz {
       this.totalScore += this.category[categoryIndex].result;
       this.category[categoryIndex].score = 0;
       this.category[categoryIndex].questionIndex = 0;
+
+      this.category[categoryIndex].isPassed = true;
+      this.category[categoryIndex].questions.forEach((item) => {
+        item.isCorrectResult = item.isCorrect;
+        item.isCorrect = null;
+      });
     }
     return result;
   }

@@ -7,6 +7,9 @@ export default class Question {
     this.name = name;
     this.author = author;
     this.year = year;
+
+    this.isCorrect = null;
+    this.isCorrectResult = false;
   }
 
   correctAnswer(choice) {

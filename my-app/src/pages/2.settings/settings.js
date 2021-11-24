@@ -66,7 +66,7 @@ let Settings = {
           <p class="settings-TimeToAnswer-title">Time to answer</p>
           <div class="settings-TimeToAnswer-params">
             <button class="TimeToAnswer-button-minus" type="button" onclick="this.nextElementSibling.stepDown()">-</button>
-            <input class="TimeToAnswer-value" type="number" min="5" max="20" value="${
+            <input class="TimeToAnswer-value" type="number" min="5" max="30" value="${
               settings.TimerTime
             }" step = "5" readonly/>
             <button class="TimeToAnswer-button-plus" type="button" onclick="this.previousElementSibling.stepUp()">+</button>

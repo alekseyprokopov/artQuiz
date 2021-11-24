@@ -16,6 +16,8 @@ import play_endround from '../../modules/play_endround';
 import timer from '../../modules/timer';
 import intervalKill from '../../modules/intervalKill';
 import getLocalStorage from '../../modules/localStorageGet';
+import setLocalStorage from '../../modules/localStorageSet';
+import setLocalResult from '../../modules/setLocalResult';
 //components:
 import Quiz from '../../components/classes/quiz';
 
@@ -39,32 +41,54 @@ let getData = async () => {
 };
 
 let artistQuiz;
+let result = { name: 'artist' };
+window.addEventListener('beforeunload', () => setLocalStorage(result));
+window.addEventListener('load', () => getLocalStorage(result));
+
+document.addEventListener('click', (e) => {
+  // if (e.target.tagName == 'BUTTON') {
+  //   Object.assign(result, artistQuiz);
+  //   // setLocalResult(result, artistQuiz)
+  // }
+  console.log(result);
+  console.log(artistQuiz);
+});
 
 let Artist = {
   render: async () => {
     if (!artistQuiz) {
       let data = await getData();
-      artistQuiz = new Quiz(data.artistData);
+      artistQuiz = new Quiz(data.artistData, 'artist');
+      if (result.category) {
+        setLocalResult(result, artistQuiz);
+      }
+      // Object.assign(result, artistQuiz);
     }
-
     let category = artistQuiz.category;
 
     let card = category
-      .map(
-        (item, index) =>
-          `<div class="category-card" id="${index}">
+      .map((item, index) => {
+        return `<div class="category-card ${
+          item.isPassed ? '' : 'monochrome'
+        }" id="${index}" >
           <div class="category-card-header">
             <p class="category-title">Round ${index + 1}</p>
-            <p class="category-score">${item.result}/10</p>
+            <p class="category-score ${item.isPassed ? '' : 'no-active'}">${
+          item.result
+        }/10</p>
           </div>
           <div class="category-card-preview">
-          <img src="../../assets/image-data-master/img/${
-            item.questions[0].num
-          }.jpg" alt="category-preview">
+            <div class="star ${item.isPassed ? '' : 'no-active'}"></div>
+
+            <img class="category-card-image" src="../../assets/image-data-master/img/${
+              item.questions[0].num
+            }.jpg" alt="category-preview">
+            <div class="category-card-footer">Play</div>
+
           </div>
         </div>
-      `
-      )
+      `;
+      })
       .join('\n');
 
     let view = /*html*/ `
@@ -94,7 +118,7 @@ export default Artist;
 //event listeners
 //клик по карточке
 document.querySelector('.pageEntry').addEventListener('click', (e) => {
-  if (e.target.closest('.category-card')) {
+  if (e.target.classList.contains('category-card-image')) {
     artistQuiz.currentCategory = +e.target.closest('.category-card').id;
     question_init(artistQuiz);
     if (settings.TimerSwitcher) timerWTF();
@@ -121,6 +145,9 @@ document.body.addEventListener('click', (e) => {
 
     overlay.classList.add('active');
     intervalKill();
+
+    //копирование результатов
+    Object.assign(result, artistQuiz);
     //показать карточку взависимости от ответа
     if (artistQuiz.isCorrect(e.target.value)) {
       answerCorrectCard.classList.add('active');
