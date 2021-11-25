@@ -74,7 +74,7 @@ let Artist = {
               item.isPassed ? '' : 'no-active'
             }"></a>
 
-            <img class="category-card-image" src="../../assets/image-data-master/img/${
+            <img class="art-category-card-image" src="../../assets/image-data-master/img/${
               item.questions[0].num
             }.jpg" alt="category-preview">
             <div class="category-card-footer">Play</div>
@@ -111,7 +111,7 @@ export default Artist;
 //event listeners
 //клик по карточке
 document.querySelector('.pageEntry').addEventListener('click', (e) => {
-  if (e.target.classList.contains('category-card-image')) {
+  if (e.target.classList.contains('art-category-card-image')) {
     artistQuiz.currentCategory = +e.target.closest('.category-card').id;
     result.currentCategory = +e.target.closest('.category-card').id;
     Object.assign(result, artistQuiz);

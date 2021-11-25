@@ -163,6 +163,7 @@
     max-width: 580px;
     width: 90%;
     padding: 2%;
+    z-index: 2;
     .close-card-button {
       display: block;
       border: none;
@@ -190,6 +191,18 @@
 
 .monochrome {
   filter: grayscale(100%);
+}
+
+.result-card-active {
+  max-width: 50%;
+  max-height: fit-content;
+  visibility: visible;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: transform 0.3s linear;
+  z-index: 100;
 }
 
 @media (max-width: 520px) {

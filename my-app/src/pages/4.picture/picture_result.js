@@ -22,7 +22,7 @@ let PictureResult = {
         let imageNum = item.num;
         let isCorrectResult = item.isCorrectResult;
         console.log(isCorrectResult);
-        return `<div class="category-card ${
+        return `<div class="category-card result-card ${
           isCorrectResult ? '' : 'monochrome'
         }" id="${index}" >
 

@@ -156,3 +156,16 @@ window.addEventListener('load', () => {
 });
 
 export default Settings;
+
+
+
+
+
+
+
+
+
+
+// `<div class="category-card ${
+//   isCorrectResult ? '' : 'monochrome'
+// } result-card result-card-activ" id="${index}" >

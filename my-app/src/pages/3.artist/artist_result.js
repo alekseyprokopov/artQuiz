@@ -24,9 +24,9 @@ let ArtistResult = {
         console.log(isCorrectResult);
         return `<div class="category-card ${
           isCorrectResult ? '' : 'monochrome'
-        }" id="${index}" >
+        } result-card" id="${index}" >
 
-          <div class="category-card-preview-result">
+          <div class="category-card-preview category-card-preview-result">
 
             <img class="category-card-image" src="../../assets/image-data-master/img/${imageNum}.jpg" alt="category-preview">
             <div class="category-card-footer-results">${
@@ -38,6 +38,9 @@ let ArtistResult = {
       `;
       })
       .join('\n');
+
+    let correctAnswer = `
+    `;
 
     let view = /*html*/ `
     <section class="container categories categories-container">
@@ -65,4 +68,34 @@ export default ArtistResult;
 
 eventClicker('star', () => {
   result;
+});
+
+// document.addEventListener('click', (e) => {
+//   let element = e.target.closest('.result-card');
+//   if (element.classList.contains('result-card-active')) {
+//     console.log(element);
+//     element.classList.remove('result-card-active');
+//     // let parent = element.parentElement.children;
+//     // for (let i = 0; i < parent.length; i++) {
+//     //   parent[i].classList.remove('no-active');
+//     // }
+//   }
+// });
+
+document.addEventListener('click', (e) => {
+  let element = e.target.closest('.result-card');
+  let parent = element.parentElement.children;
+
+  element.classList.toggle('result-card-active');
+
+  for (let i = 0; i < parent.length; i++) {
+    const item = parent[i];
+    if (!item.classList.contains('result-card-active')) {
+      item.classList.toggle('no-active');
+    }
+  }
+
+  if (element.classList.contains('no-active')) {
+    element.classList.remove('no-active');
+  }
 });
