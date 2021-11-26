@@ -9,33 +9,24 @@
   background-size: cover;
 }
 
-.button-container {
-  display: block;
-  // width: 100%;
-  // margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: $buttons-gap;
-}
-
-.main-logo {
-  width: 300px;
-  margin: 0 auto;
-  padding-top: $logo-padding-top;
-  padding-bottom: $logo-padding-bottom;
-  img{
-    width: 100%;
+.home-container {
+  .main-logo {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: $logo-padding-top;
+    padding-bottom: $logo-padding-bottom;
+    img {
+      width: 100%;
+    }
   }
-}
 
-.button-settings {
-  display: block;
-  width: 30px;
-  height: 30px;
-  background: url('../../assets/svg/settings.svg');
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-  cursor: pointer;
+  .button-settings {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url('../../assets/svg/settings.svg');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
 }

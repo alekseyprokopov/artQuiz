@@ -62,7 +62,3 @@ let PictureResult = {
 };
 
 export default PictureResult;
-
-eventClicker('star', () => {
-  result;
-});

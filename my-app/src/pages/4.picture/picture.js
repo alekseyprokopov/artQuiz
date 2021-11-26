@@ -1,9 +1,6 @@
 import './picture.scss';
-import './question.scss';
 
 //functions
-
-import changeUrl from '../../modules/changeUrl';
 import dataHandler from '../../modules/dataHandler';
 import eventClicker from '../../modules/eventClicker';
 import question_init from './question_init';
@@ -18,9 +15,6 @@ import setLocalStorage from '../../modules/localStorageSet';
 import setLocalResult from '../../modules/setLocalResult';
 //components:
 import Quiz from '../../components/classes/quiz';
-
-let categoriesCardContainer = document.createElement('div');
-categoriesCardContainer.classList.add('categories-card-container');
 
 let settings = {
   volumeValue: null,
@@ -39,12 +33,10 @@ let getData = async () => {
 };
 
 let pictureQuiz;
-
 let result = {};
 result.name = 'picture';
 
 window.addEventListener('load', () => getLocalStorage(result));
-
 window.addEventListener('beforeunload', () => setLocalStorage(result));
 
 let Picture = {
@@ -106,7 +98,17 @@ let Picture = {
   after_render: async () => {},
 };
 
-export default Picture;
+//functions
+function timerEND() {
+  timer(settings.TimerTime, () => {
+    let answerIncorrectCard = document.querySelector('.incorrect-answer');
+    let overlay = document.querySelector('.overlay');
+
+    overlay.classList.add('active');
+    answerIncorrectCard.classList.add('active');
+    pictureQuiz.guess('');
+  });
+}
 
 //event listeners
 //клик по карточке
@@ -117,7 +119,7 @@ document.querySelector('.pageEntry').addEventListener('click', (e) => {
     Object.assign(result, pictureQuiz);
     setLocalStorage(result);
     question_init(pictureQuiz);
-    if (settings.TimerSwitcher) timerWTF();
+    if (settings.TimerSwitcher) timerEND();
   }
   if (e.target.classList.contains('star')) {
     pictureQuiz.currentCategory = +e.target.closest('.pic-category-card').id;
@@ -126,17 +128,6 @@ document.querySelector('.pageEntry').addEventListener('click', (e) => {
     setLocalStorage(result);
   }
 });
-
-function timerWTF() {
-  timer(settings.TimerTime, () => {
-    let answerIncorrectCard = document.querySelector('.incorrect-answer');
-    let overlay = document.querySelector('.overlay');
-
-    overlay.classList.add('active');
-    answerIncorrectCard.classList.add('active');
-    pictureQuiz.guess('');
-  });
-}
 
 //клик по ответу
 document.body.addEventListener('click', (e) => {
@@ -159,9 +150,7 @@ document.body.addEventListener('click', (e) => {
       answerIncorrectCard.classList.add('active');
       play_wrong_answer();
     }
-
     pictureQuiz.guess(e.target.id);
-    // question_init(pictureQuiz);
   }
 });
 
@@ -174,7 +163,7 @@ document.body.addEventListener('click', (e) => {
 
   if (e.target.classList.contains('next-button')) {
     question_init(pictureQuiz);
-    if (settings.TimerSwitcher) timerWTF();
+    if (settings.TimerSwitcher) timerEND();
   }
   if (pictureQuiz)
     if (pictureQuiz.isEnded()) {
@@ -212,7 +201,7 @@ eventClicker('cancel-button', () => {
 });
 
 //обработка кнопки Yes yes-button
-eventClicker('yes-button', async () => {
+eventClicker('yes-button-picture', async () => {
   pictureQuiz.questionIndexReset();
   const content = null || document.getElementById('page_container');
   content.innerHTML = await Picture.render();
@@ -225,3 +214,5 @@ eventClicker('nextQuiz-button', async () => {
   content.innerHTML = await Picture.render();
   animation();
 });
+
+export default Picture;

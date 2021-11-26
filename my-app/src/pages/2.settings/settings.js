@@ -1,7 +1,6 @@
 import './settings.scss';
 
 //functions
-import oldHashReturn from '../../modules/oldHashReturn';
 import eventClicker from '../../modules/eventClicker';
 import play from '../../modules/playAudio';
 import getLocalStorage from '../../modules/localStorageGet';
@@ -28,7 +27,7 @@ let Settings = {
     let view = /*html*/ `
     <section class="section settings">
       <div class="container settings-container">
-        <a  class="settings-header" onclick='history.back()'>Settings</a>
+        <a  class="settings-header" onclick="history.back()">Settings</a>
         <!-- volume range -->
         <div class="settingsVolumeRange">
           <p class="settings-volume-title">Volume</p>
@@ -75,7 +74,7 @@ let Settings = {
         <!-- time to answer -->
         <div class="setting-button-container">
           <button class="button setting-button setting-button-default">Default</button>
-          <button class="button setting-button setting-button-save">Save</button>
+          <button class="button setting-button setting-button-save" onclick="history.back()">Save</button>
         </div>
       </div>
     </section>
@@ -85,7 +84,7 @@ let Settings = {
   after_render: async () => {},
 };
 
-//listeners
+//LISTENERS
 
 //звук клика
 document.addEventListener('click', (e) => {
@@ -124,6 +123,8 @@ eventClicker('speaker-on', () => {
   play(click_audio);
 });
 
+
+//обработка клика по свитчеру timeGame
 eventClicker('slider', () => {
   let slider = document.getElementById('timeGame');
   let timeToAnswer = document.querySelector('.settingsTimeToAnswer');
@@ -131,6 +132,9 @@ eventClicker('slider', () => {
   settings.TimerSwitcher = !slider.checked;
 });
 
+
+
+//обработка клика по +-
 document.addEventListener('click', (e) => {
   if (
     e.target.classList.contains('TimeToAnswer-button-minus') ||
@@ -141,13 +145,15 @@ document.addEventListener('click', (e) => {
   }
 });
 
-eventClicker('setting-button-save', () => oldHashReturn());
+//стандартные настройки
 eventClicker('setting-button-default', () => {
   Object.assign(settings, settingsDefault);
-  oldHashReturn();
+  history.back()
   audios.forEach((item) => (item.volume = settings.volumeValue));
 });
 
+
+//localStorage
 window.addEventListener('beforeunload', () => setLocalStorage(settings));
 window.addEventListener('hashchange', () => setLocalStorage(settings));
 window.addEventListener('load', () => getLocalStorage(settings));
@@ -156,16 +162,3 @@ window.addEventListener('load', () => {
 });
 
 export default Settings;
-
-
-
-
-
-
-
-
-
-
-// `<div class="category-card ${
-//   isCorrectResult ? '' : 'monochrome'
-// } result-card result-card-activ" id="${index}" >

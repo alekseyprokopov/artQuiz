@@ -20,7 +20,6 @@
       #fff 100%,
       #fff 100%
     );
-
     border-radius: 8px;
     height: 4px;
     width: 100%;
@@ -39,13 +38,10 @@
   button {
     display: block;
     width: auto;
-    // height: auto;
   }
 }
 
 .question-answers-container {
-  // max-width: fit-content;
-  // width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
@@ -56,7 +52,6 @@
     width: auto;
     min-height: 56px;
     font-size: $base-font;
-    // height: auto;
   }
 }
 
@@ -81,7 +76,6 @@
 
 .overlay-item {
   visibility: hidden;
-
   background-color: #fff;
   position: absolute;
   top: 50%;
@@ -101,7 +95,6 @@
 
 .standard {
   max-width: 520px;
-  // min-height: 80%;
   width: 80%;
   padding: 2%;
   p {
@@ -157,8 +150,6 @@
 }
 
 .result {
-  // display: none;
-
   img {
     display: block;
     width: 65%;
@@ -175,7 +166,6 @@
   .result-score {
     font-size: 50px;
     font-weight: bold;
-
     padding-bottom: 10%;
   }
 }

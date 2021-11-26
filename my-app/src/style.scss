@@ -11,17 +11,22 @@ body {
   max-width: 1440px;
   margin: 0 auto;
 }
-.page_container {
-}
 
 .container {
-  // margin: 0 auto;
   padding: $gap-vert $gap-gor;
-  // max-width: fit-content;
 }
 
 .hide-page {
   display: none;
+}
+
+.button-container {
+  display: block;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $buttons-gap;
 }
 
 .button {
@@ -33,13 +38,13 @@ body {
   background: none;
   font: $base-font;
   color: $font-color;
-  &:hover{
+  &:hover {
     color: black;
-    background:$button-hover-color;
+    background: $button-hover-color;
   }
-  &:active{
+  &:active {
     color: black;
-    background:$button-active-color;
+    background: $button-active-color;
   }
 }
 
@@ -48,11 +53,15 @@ body {
   color: black;
 }
 
-
 .run-animation {
   animation: my-animation 2s both;
 }
+
 @keyframes my-animation {
-  0% { opacity:0; }
-  100% { opacity:1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

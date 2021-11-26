@@ -2,25 +2,13 @@ import './style.scss';
 
 import Home from './pages/1.home/home';
 import Settings from './pages/2.settings/settings';
-
 import Artist from './pages/3.artist/artist';
 import ArtistResult from './pages/3.artist/artist_result';
-
 import Picture from './pages/4.picture/picture';
 import PictureResult from './pages/4.picture/picture_result';
-
-
-// import PictureCategory from './pages/3.pictureCategory';
-
-// import QuestionPicture   from    './pages/4.question_picture';
-
-import Error404 from './views/pages/Error404.js';
-import PostShow from './views/pages/PostShow.js';
-import Register from './views/pages/Register.js';
-
+import Error404 from './pages/Error404.js';
 import Bottombar from './components/footer';
-
-import Utils from './services/Utils.js';
+import Utils from './modules/Utils.js';
 import animation from './modules/animation';
 
 const routes = {
@@ -30,27 +18,14 @@ const routes = {
   '/artist-result': ArtistResult,
   '/picture': Picture,
   '/picture-result': PictureResult,
-
-
-
-  // '/picture-category': PictureCategory,
-
-  // '/question': Question,
-  // '/question_picture': QuestionPicture,
-
-  '/p/:id': PostShow,
-  '/register': Register,
 };
 
 const router = async () => {
   // Lazy load view element:
-  const header = null || document.getElementById('header_container');
   const content = null || document.getElementById('page_container');
   const footer = null || document.getElementById('footer_container');
 
-  // Render the Header and footer of the page
-  // header.innerHTML = await Navbar.render();
-  // await Navbar.after_render();
+
   footer.appendChild(await Bottombar.render());
   await Bottombar.after_render();
 
@@ -84,7 +59,3 @@ window.addEventListener('hashchange', router);
 
 // Listen on page load:
 window.addEventListener('load', router);
-
-// console.log(
-//   'Привет, у меня небольшая просьба к вам. Я пока не успел закончить проект.Если не составит трудностей, проверьте, меня, пожалуйста, в четверг или хотя бы в среду вечером. Спасибо'
-// );

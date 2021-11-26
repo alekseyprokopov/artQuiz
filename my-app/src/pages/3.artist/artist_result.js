@@ -1,8 +1,7 @@
-import eventClicker from '../../modules/eventClicker';
 import getLocalStorage from '../../modules/localStorageGet';
 
+//результат игры и его загрузка
 let result = { name: 'artist' };
-
 window.addEventListener('load', () => getLocalStorage(result));
 window.addEventListener('hashchange', () => getLocalStorage(result));
 
@@ -11,10 +10,7 @@ let ArtistResult = {
     getLocalStorage(result);
     let currentCategory = result.currentCategory;
     let category = result.category;
-    let question = category[currentCategory];
     let questions = category[currentCategory].questions;
-
-    console.log(category);
 
     let card = questions
       .map((item, index) => {
@@ -39,9 +35,6 @@ let ArtistResult = {
       })
       .join('\n');
 
-    let correctAnswer = `
-    `;
-
     let view = /*html*/ `
     <section class="container categories categories-container">
       <div class="categories-header">
@@ -63,29 +56,11 @@ let ArtistResult = {
   },
   after_render: async () => {},
 };
-
-export default ArtistResult;
-
-eventClicker('star', () => {
-  result;
-});
-
-// document.addEventListener('click', (e) => {
-//   let element = e.target.closest('.result-card');
-//   if (element.classList.contains('result-card-active')) {
-//     console.log(element);
-//     element.classList.remove('result-card-active');
-//     // let parent = element.parentElement.children;
-//     // for (let i = 0; i < parent.length; i++) {
-//     //   parent[i].classList.remove('no-active');
-//     // }
-//   }
-// });
-
+//LISTENERS
+//клик по карточке с картиной
 document.addEventListener('click', (e) => {
   let element = e.target.closest('.result-card');
   let parent = element.parentElement.children;
-
   element.classList.toggle('result-card-active');
 
   for (let i = 0; i < parent.length; i++) {
@@ -99,3 +74,5 @@ document.addEventListener('click', (e) => {
     element.classList.remove('no-active');
   }
 });
+
+export default ArtistResult;
